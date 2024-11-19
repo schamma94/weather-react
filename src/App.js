@@ -12,7 +12,7 @@ function App() {
       <div className="open-source">
         <a
           className="source-link"
-          href="https://github.com/schamma94/sarahc-weather-react"
+          href="https://github.com/schamma94/weather-react"
           target="_blank"
           rel="noreferrer"
         >
