@@ -67,11 +67,11 @@ export default function Weather() {
           <p>
             <img src={weather.icon} alt={weather.description} />
           </p>
-          <a href="#" class="celsius">
+          <a href="javascript:void(0)" class="celsius">
             °C
           </a>
           {""} | {""}
-          <a href="#" class="fahrenheit">
+          <a href="javascript:void(0)" class="fahrenheit">
             °F
           </a>
         </div>
