@@ -14,6 +14,7 @@ function App() {
           className="source-link"
           href="https://github.com/schamma94/sarahc-weather-react"
           target="_blank"
+          rel="noreferrer"
         >
           {" "}
           Open Source Code
