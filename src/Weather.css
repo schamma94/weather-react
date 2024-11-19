@@ -1,0 +1,137 @@
+h1 {
+  color: white;
+  display: inline-block;
+  font-size: 45px;
+  font-weight: 700;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+.cityName {
+  color: white;
+  font-size: 30px;
+  font-weight: bolder;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-top: -8px;
+}
+
+.Condition {
+  color: white;
+  margin-top: 12px;
+}
+
+h2 {
+  color: white;
+  display: inline-block;
+}
+
+.date {
+  color: white;
+  display: block;
+  font-weight: bolder;
+}
+
+.live-weather {
+  color: white;
+  display: inline-block;
+  font-size: 13px;
+}
+
+.fa-location-dot {
+  font-size: 30px;
+}
+
+.temp-range {
+  color: white;
+  display: inline-block;
+  font-size: 13px;
+}
+
+.weather-desc {
+  text-transform: capitalize;
+}
+
+.forecast,
+.row,
+.weekly-forecast-title,
+#wind-speed {
+  color: white;
+}
+
+.wind {
+  font-weight: bold;
+}
+.wind-section {
+  margin-left: 45px;
+  margin-right: 70px;
+  text-align: center;
+}
+
+.humidity {
+  font-weight: bold;
+}
+.humidity-section {
+  text-align: center;
+}
+
+.weekly-forecast-title {
+  font-weight: bold;
+}
+
+.celsius {
+  color: white;
+  text-decoration: none;
+}
+.celsius:hover {
+  color: lightskyblue;
+}
+
+.fahrenheit {
+  color: white;
+  text-decoration: none;
+}
+.fahrenheit:hover {
+  color: lightskyblue;
+}
+.active {
+  color: greenyellow;
+}
+
+.submit-button {
+  margin-bottom: 13px;
+  margin-left: 15px;
+  margin-top: -17px;
+}
+.current-button {
+  margin-bottom: 12px;
+  margin-left: 10px;
+  margin-top: -17px;
+}
+
+.form-control {
+  bottom: -95px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  left: -285px;
+  margin-top: -15px;
+}
+
+input {
+  display: inline-block;
+}
+
+form {
+  display: inline-flex;
+}
+
+img {
+  display: inline-flex;
+}
+
+.open-source {
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+.source-link {
+  color: greenyellow;
+}
