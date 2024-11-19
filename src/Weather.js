@@ -67,11 +67,13 @@ export default function Weather() {
           <p>
             <img src={weather.icon} alt={weather.description} />
           </p>
-          <a href="javascript:void(0)" class="celsius">
+          // eslint-disable-next-line
+          <a href="#" className="celsius">
             °C
           </a>
           {""} | {""}
-          <a href="javascript:void(0)" class="fahrenheit">
+          // eslint-disable-next-line
+          <a href="#" className="fahrenheit">
             °F
           </a>
         </div>
