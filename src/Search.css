@@ -1,3 +1,16 @@
+form .form-control {
+  bottom: -20px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  height: 25px;
+  left: -285px;
+  margin-top: -15px;
+  width: 190px;
+}
+
+.search-bar {
+  display: inline-block;
+}
+
 .submit-button {
   margin-bottom: 13px;
   margin-left: 15px;
@@ -7,11 +20,4 @@
   margin-bottom: 12px;
   margin-left: 10px;
   margin-top: -17px;
-}
-
-.form-control {
-  bottom: -95px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-  left: -285px;
-  margin-top: -15px;
 }

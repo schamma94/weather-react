@@ -8,6 +8,7 @@ import "./Search.css";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
   function handleResponse(response) {
     /* console.log(response.data); */
     setWeatherData({
@@ -18,8 +19,25 @@ export default function Weather(props) {
       date: new Date(response.data.time * 1000),
       humidity: response.data.temperature.humidity,
       wind: response.data.wind.speed,
+      icon: `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
     });
   }
+
+  function search() {
+    const apiKey = "7c4o751d73aaefa4bb6bct819c760c00";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
   if (weatherData.ready) {
     return (
       <div className="row">
@@ -31,8 +49,8 @@ export default function Weather(props) {
               </h1>
               <img
                 className="current-icon"
-                src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
-                alt="Sunny"
+                src={weatherData.icon}
+                alt={weatherData.description}
               />
             </div>
             <div className="current-weather-desc">
@@ -57,14 +75,15 @@ export default function Weather(props) {
         </div>
 
         <div className="col-6">
-          <form className="search-bar">
+          <form className="search-bar" onSubmit={handleSubmit}>
             <div className="d-flex">
               <input
-                type="text"
+                type="search"
                 className="form-control"
                 placeholder="Search city.."
                 autoFocus
                 autoComplete="off"
+                onChange={handleCityChange}
               />
               <button type="submit" className="submit-button">
                 🔍
@@ -101,10 +120,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "7c4o751d73aaefa4bb6bct819c760c00";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-
+    search();
     return "Loading...";
   }
 }
