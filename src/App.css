@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 body {
   background: linear-gradient(to right, rgb(128, 0, 128), rgb(255, 192, 203));
 }
@@ -9,8 +5,19 @@ body {
 .container.border.border-4 {
   border-color: white !important;
   border-radius: 50px;
+  color: white;
   height: 470px;
   margin-top: 20px;
   max-width: 640px;
   padding: 40px;
+}
+
+.open-source {
+  color: white;
+  font-weight: 500;
+  padding: 15px;
+  text-align: center;
+}
+.source-link {
+  color: greenyellow;
 }

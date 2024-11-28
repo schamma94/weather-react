@@ -1,85 +1,110 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import "./Weather.css";
+import FormattedDate from "./FormattedDate";
 import "./Search.css";
 
-export default function Weather() {
-  const [city, setCity] = useState(null);
-  const [weather, setWeather] = useState({});
-  const [info, setInfo] = useState(false);
-
-  function displayWeather(response) {
-    setInfo(true);
-    setWeather({
-      city: response.data.name,
-      temperature: response.data.main.temp,
-      description: response.data.weather[0].description,
-      humidity: response.data.main.humidity,
+export default function Weather(props) {
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  function handleResponse(response) {
+    /* console.log(response.data); */
+    setWeatherData({
+      ready: true,
+      city: response.data.city,
+      temperature: response.data.temperature.current,
+      description: response.data.condition.description,
+      date: new Date(response.data.time * 1000),
+      humidity: response.data.temperature.humidity,
       wind: response.data.wind.speed,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
   }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    let apiKey = `0efb4fc16a9ed98dc0b3aafd8491d6ad`;
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-    axios.get(apiUrl).then(displayWeather);
-  }
-
-  function updateCity(event) {
-    setCity(event.target.value);
-  }
-
-  let form = (
-    <form className="searchForm" onSubmit={handleSubmit}>
-      <input
-        style={{ height: "25px", width: "190px" }}
-        type="text"
-        className="form-control"
-        placeholder="Search city"
-        onChange={updateCity}
-        autoFocus
-      />
-      <button type="submit" className="submit-button">
-        🔍
-      </button>
-      <button type="button" className="current-button">
-        Current
-      </button>
-    </form>
-  );
-
-  if (info) {
+  if (weatherData.ready) {
     return (
-      <div className="App">
-        {form}
-        <div className="Condition">
-          <p className="cityName">
-            📍 {""}
-            {weather.city} {Math.round(weather.temperature)}°C
-          </p>
-          <em className="last-updated">Last updated:</em>
-          <span className="date">Tuesday, 19 Nov, 4:00 PM</span>
-          <p>Description: {weather.description}</p>
-          <p>Humidity: {weather.humidity}%</p>
-          <p>Wind: {Math.round(weather.wind)}km/h</p>
-          <p>
-            <img src={weather.icon} alt={weather.description} />
-          </p>
-          {/* eslint-disable-next-line */}
-          <a href="#" className="celsius">
-            °C
-          </a>
-          {""} | {""}
-          {/* eslint-disable-next-line */}
-          <a href="#" className="fahrenheit">
-            °F
-          </a>
+      <div className="row">
+        <div className="col-5">
+          <div className="current-temp-box">
+            <div className="d-flex">
+              <h1 className="current-degrees">
+                {Math.round(weatherData.temperature)}°
+              </h1>
+              <img
+                className="current-icon"
+                src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+                alt="Sunny"
+              />
+            </div>
+            <div className="current-weather-desc">
+              {weatherData.description}
+            </div>
+          </div>
+          <div className="d-flex justify-content-center mb-3">
+            <div>
+              {/* eslint-disable-next-line */}
+              <a href="#" className="celsius">
+                °C
+              </a>
+            </div>
+            |
+            <div>
+              {/* eslint-disable-next-line */}
+              <a href="#" className="fahrenheit">
+                °F
+              </a>
+            </div>
+          </div>
         </div>
+
+        <div className="col-6">
+          <form className="search-bar">
+            <div className="d-flex">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search city.."
+                autoFocus
+                autoComplete="off"
+              />
+              <button type="submit" className="submit-button">
+                🔍
+              </button>
+              <button type="submit" className="current-button">
+                Current
+              </button>
+            </div>
+          </form>
+          <div className="d-flex">
+            <FontAwesomeIcon icon={faLocationDot} className="pinpoint-icon" />
+            <h1 className="city">{weatherData.city}</h1>
+          </div>
+          <div>
+            <em className="last-updated">Last updated:</em>
+          </div>
+          <span className="updated-date">
+            <FormattedDate date={weatherData.date} />
+          </span>
+        </div>
+        <div className="d-flex w-50 justify-content-between mb-4"></div>
+        <div className="d-flex w-25 justify-content-between">
+          <div className="wind-section">
+            <p className="wind">Wind</p>
+            <span className="wind-speed">{Math.round(weatherData.wind)}</span>
+            km/h
+          </div>
+          <div className="humidity-section">
+            <p className="humidity">Humidity</p>
+            <span className="humidity-number">{weatherData.humidity}</span>%
+          </div>
+        </div>
+        <p className="forecast-title">Weekly Forecast</p>
       </div>
     );
   } else {
-    return form;
+    const apiKey = "7c4o751d73aaefa4bb6bct819c760c00";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+
+    return "Loading...";
   }
 }
