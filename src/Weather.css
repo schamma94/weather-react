@@ -27,7 +27,7 @@
 }
 
 .celsius {
-  margin-right: 5px;
+  margin-right: 1px;
 }
 .fahrenheit {
   margin-left: 3px;
@@ -47,9 +47,7 @@
   margin-top: -15px;
 }
 
-/* 2 - SEARCH SECTION */
-
-/* 3 - CURRENT CITY SECTION */
+/* 2 - CURRENT CITY SECTION */
 
 .pinpoint-icon {
   font-size: 30px;
@@ -69,7 +67,7 @@
   font-weight: bolder;
 }
 
-/* 4 - CURRENT WEATHER CONDITION SECTION */
+/* 3 - CURRENT WEATHER CONDITION SECTION */
 
 .wind {
   font-weight: bold;
@@ -89,7 +87,7 @@
   margin-top: -25px;
 }
 
-/* 5 - FORECAST SECTION */
+/* 4 - FORECAST SECTION */
 .forecast-title {
   font-weight: bold;
 }

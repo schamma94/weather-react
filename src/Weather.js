@@ -4,11 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import "./Weather.css";
 import FormattedDate from "./FormattedDate";
+import TempScale from "./TempScale";
+import WeatherForecast from "./WeatherForecast";
 import "./Search.css";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
+
   function handleResponse(response) {
     /* console.log(response.data); */
     setWeatherData({
@@ -19,6 +22,7 @@ export default function Weather(props) {
       date: new Date(response.data.time * 1000),
       humidity: response.data.temperature.humidity,
       wind: response.data.wind.speed,
+      coordinates: response.data.coordinates,
       icon: `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
     });
   }
@@ -58,19 +62,7 @@ export default function Weather(props) {
             </div>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <div>
-              {/* eslint-disable-next-line */}
-              <a href="#" className="celsius">
-                °C
-              </a>
-            </div>
-            |
-            <div>
-              {/* eslint-disable-next-line */}
-              <a href="#" className="fahrenheit">
-                °F
-              </a>
-            </div>
+            <TempScale celsius={weatherData.temperature} />
           </div>
         </div>
 
@@ -117,6 +109,7 @@ export default function Weather(props) {
           </div>
         </div>
         <p className="forecast-title">Weekly Forecast</p>
+        <WeatherForecast coordinates={weatherData.coordinates} />
       </div>
     );
   } else {
