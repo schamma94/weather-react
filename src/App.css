@@ -21,3 +21,15 @@ body {
 .source-link {
   color: greenyellow;
 }
+
+.gif-container {
+  position: relative;
+  left: 500px;
+}
+
+.pusheen-gif {
+  position: absolute;
+  top: -150px;
+  height: 135px;
+  left: 540px;
+}
