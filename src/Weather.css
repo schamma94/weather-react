@@ -43,6 +43,10 @@
   color: lightskyblue;
 }
 
+.TempScale .active {
+  color: greenyellow;
+}
+
 .current-icon {
   margin-top: -15px;
 }

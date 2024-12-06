@@ -11,6 +11,7 @@ import "./Search.css";
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
+  const [unit, setUnit] = useState("celsius");
 
   function handleResponse(response) {
     /* console.log(response.data); */
@@ -42,6 +43,10 @@ export default function Weather(props) {
     setCity(event.target.value);
   }
 
+  function fahrenheit() {
+    return (weatherData.temperature * 9) / 5 + 32;
+  }
+
   if (weatherData.ready) {
     return (
       <div className="row">
@@ -49,7 +54,10 @@ export default function Weather(props) {
           <div className="current-temp-box">
             <div className="d-flex">
               <h1 className="current-degrees">
-                {Math.round(weatherData.temperature)}°
+                {unit === "celsius"
+                  ? Math.round(weatherData.temperature)
+                  : Math.round(fahrenheit())}
+                °
               </h1>
               <img
                 className="current-icon"
@@ -62,7 +70,7 @@ export default function Weather(props) {
             </div>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <TempScale celsius={weatherData.temperature} />
+            <TempScale unit={unit} setUnit={setUnit} />
           </div>
         </div>
 
