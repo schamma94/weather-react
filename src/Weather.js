@@ -47,6 +47,33 @@ export default function Weather(props) {
     return (weatherData.temperature * 9) / 5 + 32;
   }
 
+  /* CURRENT LOCATION INFO */
+
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          getWeatherByCoordinates(lat, lon);
+        },
+        (error) => {
+          console.error("Error getting location", error);
+          alert("Unable to retrieve your location");
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by your browser");
+    }
+  };
+
+  const getWeatherByCoordinates = (lat, lon) => {
+    const apiKey = "7c4o751d73aaefa4bb6bct819c760c00";
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?lat=${lat}&lon=${lon}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  };
+
   if (weatherData.ready) {
     return (
       <div className="row">
@@ -88,7 +115,11 @@ export default function Weather(props) {
               <button type="submit" className="submit-button">
                 🔍
               </button>
-              <button type="submit" className="current-button">
+              <button
+                type="submit"
+                className="current-button"
+                onClick={getCurrentLocation}
+              >
                 Current
               </button>
             </div>

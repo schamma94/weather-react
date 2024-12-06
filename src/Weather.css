@@ -66,7 +66,6 @@
 }
 
 .updated-date {
-  color: white;
   display: block;
   font-weight: bolder;
 }
@@ -87,8 +86,8 @@
   font-weight: bold;
 }
 .humidity-section {
-  text-align: center;
   margin-top: -25px;
+  text-align: center;
 }
 
 /* 4 - FORECAST SECTION */
